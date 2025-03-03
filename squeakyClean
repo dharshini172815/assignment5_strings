@@ -1,0 +1,45 @@
+class SqueakyClean {
+    static String clean(String identifier) {
+        StringBuilder result = new StringBuilder();
+        boolean toUpperCase = false;
+
+        for (int i = 0; i < identifier.length(); i++) {
+            char c = identifier.charAt(i);
+
+            // Replace spaces with underscores
+            if (c == ' ') {
+                result.append('_');
+            } 
+            // Convert kebab-case to camelCase
+            else if (c == '-') {
+                toUpperCase = true; // The next character should be uppercase
+            } 
+            // Convert leetspeak
+            else if (c == '4') {
+                result.append('a');
+            } 
+            else if (c == '3') {
+                result.append('e');
+            } 
+            else if (c == '0') {
+                result.append('o');
+            } 
+            else if (c == '1') {
+                result.append('l');
+            } 
+            else if (c == '7') {
+                result.append('t');
+            } 
+            // Allow only letters and convert kebab-case properly
+            else if (Character.isLetter(c)) {
+                if (toUpperCase) {
+                    result.append(Character.toUpperCase(c));
+                    toUpperCase = false; // Reset flag
+                } else {
+                    result.append(c);
+                }
+            }
+        }
+        return result.toString();
+    }
+}
